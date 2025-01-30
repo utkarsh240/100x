@@ -47,6 +47,34 @@ app.post("/signin", function(req,res){
     const username = req.body.username;
     const password = req.body.password;
 
+    // const user = users.find (function(u) {
+    //     if (u.username== username && u.password== password){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // })
+
+    let founduser = null;
+
+    for(let i =0; i<users.length;i++){
+        if(users[i].username == username && users[i].password == password){
+            founduser = users[i];
+        }
+    }
+
+    if(founduser){
+        const token = generateToken();
+        founduser.token = token;
+        res.json({
+            token:token
+        })
+        }else{
+            res.status(403).send({
+                message: "invalid user or password"
+            });
+    }
+    console.log(users);
 })
 
 app.listen(3000);
