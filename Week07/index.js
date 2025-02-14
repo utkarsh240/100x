@@ -1,11 +1,12 @@
+const bcrypt = require("bcrypt");
 const express = require("express");
 const { UserModel, TodoModel } = require("./db");
 const { auth, JWT_SECRET } = require("./auth");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const JWT_SECRET ="123abcde";
+const { hash } = require("bcrypt");
 
-mongoose.connect("mongodb+srv://inet.utkarsh:O8335BlhFFHfT5uE@Cluster0.sq4gd.mongodb.net/todo-utkarsh");
+mongoose.connect("mongodb+srv://inetutkarsh:7KysyXfpMV3t3toI@cluster100x.gubdh.mongodb.net/");
 const app = express();
 app.use(express.json());
 
@@ -14,9 +15,13 @@ app.post("/signup", async function(req, res) {
     const password = req.body.password;
     const name = req.body.name;
 
+    const hashedPassword =  await bcrypt.hash(password,5);
+    console.log(hashedPassword);
+
+
     await UserModel.create({
         email: email,
-        password: password,
+        password: hashedPassword, 
         name: name
     });
     
