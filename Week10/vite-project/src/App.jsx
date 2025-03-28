@@ -1,26 +1,26 @@
-import { useState,useEffect } from "react";
 
-function App(){
-  return <div>
-    <Counter></Counter>
+
+const App = () =>{
+
+  return (
+    <div>
+      {[
+        <Todo key={1} title={"Go to Gym"} done = {false}/>,
+        <Todo key={2} title={"Eat Food"} done={false}/>
+      ]}
     </div>
+  )
+
 }
 
-function Counter(){
-  const[count, setCount]= useState(0);
-  
-  useEffect(function(){
-  setInterval(function(){
-    setCount(function(count) {
-      return count + 1;
-    })
-  }, 1000)
- }, []);
 
+function Todo({title, done}){
   return <div>
-    <h1 id="text">{count}</h1>
+    {title} - {done ? "done" : "not done"}
   </div>
 }
+
+ 
 
 
 export default App
