@@ -1,20 +1,23 @@
 import { useState } from 'react'
 import './App.css'
+import {usePrev} from "./hooks/use-prev"
 
 function App() {
-  const[count, setCount] = useState(0);
-
-  function increaseCount() {
-    setCount(count+1)
-    //setCount(c=>c+1)
-  }
-
+  const [state, setState] = useState(0);
+  const prev = usePrev(state);
 
   return (
-    <div>
-      <button onClick={increaseCount}>Increase {count}</button>
-    </div>
-  )
+    <>
+    <p>{state}</p>
+    <button onClick={()=>{
+      setState((curr)=> curr+1);
+    }}
+    >Click Me
+    </button>
+    <p>The prev val was {prev}</p>
+  </>
+  );
 }
 
 export default App
+ 
