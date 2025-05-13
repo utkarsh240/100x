@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import './App.css'
 import {RecoilRoot, atom} from 'recoil';
 
@@ -17,6 +17,13 @@ function App() {
 
 function Counter(){
   const [count, setCount] = useState(0);
+
+  useEffect(()=>{
+    setInterval(()=>{
+      setCount(c=>c+1)
+    },3000)
+  },[])
+
   return <div>
     {count}
     <Increase setCount={setCount}/>
@@ -24,7 +31,13 @@ function Counter(){
   </div>
 }
 
-function Decrease({setCount}){
+const CurrentCount = memo(function(){
+  return <div>
+    1
+  </div>
+})
+
+const Decrease = memo(function()){
   function decrease(){
     setCount(c=>c-1);
   }
