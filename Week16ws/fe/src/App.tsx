@@ -4,23 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [socket, setSocket] = useState()
-  const inputRef = useRef();
-
+  
   function sendMessage(){
-    if(!socket) {
-      return;
-    }
-    //@ts-ignore
-    const message = inputRef.current.value;
-    socket.send(message)
   }
+
   useEffect(()=>{
     const ws = new WebSocket("ws://localhost:8080");
-    setSocket(ws)
-
-    ws.onmessage = (ev) =>{
-      alert(ev.data);
+    ws.onmessage = (e) =>{
+      console.log(e.data);
     }
   },[])
 
