@@ -2,8 +2,11 @@ import { WebSocketServer,WebSocket } from 'ws';
 
 const wss = new WebSocketServer({ port: 8080 });
 
-let userCount =0;
-let allSockets: WebSocket[] =[];
+
+let allSockets = {
+    "room1"
+}
+
 wss.on('connection',(socket)=>{
     allSockets.push(socket);
     
